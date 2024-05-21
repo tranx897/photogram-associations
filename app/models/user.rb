@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many(:own_photos, class_name: "Photo", foreign_key: "owner_id")
 
   # User#likes: returns rows from the likes table associated to this user by the fan_id column
-  belongs_to(:likes, class_name: "Like", foreign_key: "fan_id")
+  has_many(:likes, class_name: "Like", foreign_key: "fan_id")
 
   # User#sent_follow_requests: returns rows from the follow requests table associated to this user by the sender_id column
   has_many(:sent_follow_requests, class_name: "FollowRequest", foreign_key: "sender_id")
@@ -59,7 +59,7 @@ class User < ApplicationRecord
   # Note source: :sender comes from the FollowRequest class definition
 
   # User#leaders: returns rows from the users table associated to this user through its accepted_sent_follow_requests (the follow requests' recipients)
-  has_many(:leaders, through: :accepted_sent_follow_requests, source: :reipient )
+  has_many(:leaders, through: :accepted_sent_follow_requests, source: :recipient )
   # Note source: :recipient comes from the FollowRequest class definition
 
   # User#feed: returns rows from the photos table associated to this user through its leaders (the leaders' own_photos)
