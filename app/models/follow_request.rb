@@ -18,7 +18,7 @@ class FollowRequest < ApplicationRecord
   })
 
   # Define status scope
-
+  scope :accepted, -> {where(status: "accepted")}
 
   # Association accessor methods to define:
   
